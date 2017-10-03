@@ -176,7 +176,7 @@ public class GoogleContainerRegistryCredential
   /** {@inheritDoc} */
   @Override
   public DescriptorImpl getDescriptor() {
-    throw new UnsupportedOperationException();
+    throw new AssertionError();
   }
 
   /**

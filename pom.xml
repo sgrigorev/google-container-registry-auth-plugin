@@ -47,9 +47,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
+    <connection>scm:git:git://github.com/sgrigorev/${project.artifactId}-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:sgrigorev/${project.artifactId}-plugin.git</developerConnection>
+    <url>http://github.com/sgrigorev/${project.artifactId}-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -181,7 +181,7 @@
     <dependency>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>docker-commons</artifactId>
-        <version>1.0</version>
+        <version>1.8</version>
     </dependency>
 
     <!-- Auth dependency -->
@@ -189,6 +189,12 @@
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>google-oauth-plugin</artifactId>
       <version>0.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>args4j</groupId>
+      <artifactId>args4j</artifactId>
+      <version>2.33</version>
     </dependency>
 
     <!-- Test dependencies -->

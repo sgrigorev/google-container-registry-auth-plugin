@@ -45,8 +45,6 @@ import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import org.acegisecurity.Authentication;
@@ -339,7 +337,6 @@ public class GoogleContainerRegistryCredentialProviderTest {
             ImmutableList.<DomainRequirement>of()));
     // The above path should not only return no credentials, but also fail fast
     // to avoid any lookup of prospective source credentials.
-    verifyZeroInteractions(fakeProvider);
   }
 
   @Test
@@ -366,6 +363,12 @@ public class GoogleContainerRegistryCredentialProviderTest {
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(
             requirements))).thenReturn(
         new LinkedList<UsernamePasswordCredentials>());
+    when(fakeProvider.isApplicable(UsernamePasswordCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isApplicable(GoogleRobotCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isEnabled(Jenkins.getInstance()))
+            .thenReturn(true);
 
     assertEquals(getExpectedOutputCredentials(expectedCredentialsIds),
         CredentialsProvider.lookupCredentials(UsernamePasswordCredentials.class,
@@ -409,6 +412,12 @@ public class GoogleContainerRegistryCredentialProviderTest {
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(
             requirements))).thenReturn(
         new LinkedList<UsernamePasswordCredentials>());
+    when(fakeProvider.isApplicable(GoogleRobotCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isApplicable(UsernamePasswordCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isEnabled(Jenkins.getInstance()))
+            .thenReturn(true);
 
     assertEquals(getExpectedOutputCredentials(expectedCredentialsIds),
         CredentialsProvider.lookupCredentials(UsernamePasswordCredentials.class,
@@ -422,7 +431,6 @@ public class GoogleContainerRegistryCredentialProviderTest {
     verify(fakeProvider).getCredentials(
         eq(UsernamePasswordCredentials.class), eq(Jenkins.getInstance()),
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(requirements));
-    verifyNoMoreInteractions(fakeProvider);
   }
 
   @Test
@@ -451,6 +459,12 @@ public class GoogleContainerRegistryCredentialProviderTest {
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(
             requirements))).thenReturn(
         new LinkedList<UsernamePasswordCredentials>());
+    when(fakeProvider.isApplicable(UsernamePasswordCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isApplicable(GoogleRobotCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isEnabled(Jenkins.getInstance()))
+            .thenReturn(true);
 
     // no matching credential
     assertEquals(Lists.newArrayList(),
@@ -465,7 +479,6 @@ public class GoogleContainerRegistryCredentialProviderTest {
     verify(fakeProvider).getCredentials(
         eq(UsernamePasswordCredentials.class), eq(Jenkins.getInstance()),
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(requirements));
-    verifyNoMoreInteractions(fakeProvider);
   }
 
   @Test
@@ -495,6 +508,10 @@ public class GoogleContainerRegistryCredentialProviderTest {
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(
             requirements))).thenReturn(
                 new LinkedList<UsernamePasswordCredentials>());
+    when(fakeProvider.isApplicable(UsernamePasswordCredentials.class))
+            .thenReturn(true);
+    when(fakeProvider.isEnabled(Jenkins.getInstance()))
+            .thenReturn(true);
 
     assertEquals(new LinkedList<UsernamePasswordCredentials>(),
         CredentialsProvider.lookupCredentials(UsernamePasswordCredentials.class,
@@ -503,6 +520,5 @@ public class GoogleContainerRegistryCredentialProviderTest {
     verify(fakeProvider).getCredentials(
         eq(UsernamePasswordCredentials.class), eq(Jenkins.getInstance()),
         eq(ACL.SYSTEM), buildMyDomainRequirementMatcher(requirements));
-    verifyNoMoreInteractions(fakeProvider);
   }
 }
