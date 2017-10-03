@@ -24,7 +24,7 @@
 
   <artifactId>google-container-registry-auth</artifactId>
   <packaging>hpi</packaging>
-  <version>0.4</version>
+  <version>0.5-SNAPSHOT</version>
 
   <name>Google Container Registry Auth Plugin</name>
   <description>
@@ -50,7 +50,7 @@
     <connection>scm:git:git://github.com/sgrigorev/${project.artifactId}-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:sgrigorev/${project.artifactId}-plugin.git</developerConnection>
     <url>http://github.com/sgrigorev/${project.artifactId}-plugin</url>
-    <tag>google-container-registry-auth-0.4</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <reporting>
